@@ -1,0 +1,80 @@
+# Directorios y archivos de compilación
+/target/
+/out/
+/build/
+
+# Archivos de configuración específicos del IDE
+/.idea/
+/*.iml
+*.iws
+*.ipr
+*.class
+
+# Archivos de configuración del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+
+# Archivos de configuración del entorno
+.env
+*.env
+
+# Librerías generadas
+*.jar
+*.war
+*.ear
+
+# Archivos de configuración específicos de herramientas
+/.mvn/
+/.settings/
+/.project
+/.classpath
+*.vscode/
+
+# Archivos generados por Maven
+dependency-reduced-pom.xml
+release.properties
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+# SonarQube working directories
+/.sonar/
+
+# Archivos de empaquetado
+*.zip
+*.tar.gz
+*.rar
+
+# Directorios de caches y datos temporales
+/.gradle/
+/.gradle/
+/.build/
+!gradle-wrapper.jar
+
+# Archivos de lock
+yarn.lock
+package-lock.json
+
+# Archivos de configuración del sistema operativo
+*.swp
+*.swo
+
+# Ignorar archivos específicos de IntelliJ
+.idea/
+*.iws
+*.iml
+.idea/*
+.idea_modules/
+
+
+
+# NetBeans project files
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+
