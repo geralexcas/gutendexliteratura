@@ -1,9 +1,9 @@
 package com.geralexcas.gutendexlitelatura.model;
-
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
-//import com.geralexcas.gutendexlitelatura.model.DatosLibros;
+
 @Entity
 @Table(name = "libros")
 public class Libro {
@@ -13,15 +13,19 @@ public class Libro {
     @Column(unique = true)
     private String titulo;
     @Enumerated(EnumType.STRING)
-    private String idioma;
+    private Idioma idioma;
+   // private Double numeroDeDescargas;
     @ManyToOne()
     private Autor autor;
 
 
-    public Libro(String titulo, String idioma, Autor autor) {
-        this.titulo = titulo;
-        this.idioma = idioma;
-        this.autor = autor;
+    public Libro() {}
+
+    public Libro(DatosLibros datosLibro) {
+        this.titulo = datosLibro.titulo();
+        this.idioma = Idioma.fromString(datosLibro.idiomas().stream()
+                .limit(1).collect(Collectors.joining()));
+
     }
 
     public Long getId() {
@@ -40,13 +44,21 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public String getIdioma() {
+    public Idioma getIdioma() {
         return idioma;
     }
 
-    public void setIdioma(String idioma) {
+    public void setIdioma(Idioma idioma) {
         this.idioma = idioma;
     }
+
+  /*  public Double getNumeroDeDescargas() {
+        return numeroDeDescargas;
+    } */
+
+   /* public void setNumeroDeDescargas(Double numeroDeDescargas) {
+        this.numeroDeDescargas = numeroDeDescargas;
+    } */
 
     public Autor getAutor() {
         return autor;
@@ -55,7 +67,14 @@ public class Libro {
     public void setAutor(Autor autor) {
         this.autor = autor;
     }
+
+    @Override
+    public String toString() {
+        return "--------------- LIBRO ------------------" +
+                "\nTítulo: " + titulo +
+                "\nAutor: " + getAutor().getNombre() +
+                "\nIdioma: " + idioma +
+
+                "\n----------------------------------------\n";
+    }
 }
-
-
-
