@@ -2,6 +2,7 @@ package com.geralexcas.gutendexlitelatura.repository;
 
 import com.geralexcas.gutendexlitelatura.model.Autor;
 import com.geralexcas.gutendexlitelatura.model.Libro;
+import  com.geralexcas.gutendexlitelatura.model.Idioma;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,5 +21,8 @@ public interface IAutorRepository extends JpaRepository<Autor, Long> {
     List<Libro> librosRegistrados();
     @Query("SELECT a FROM Autor a WHERE a.fechaDeNacimiento <= :fecha AND a.fechaDeFallecimiento > :fecha ")
     List<Autor> listarAutoresVivos(@Param("fecha")Integer fecha);
+
+    @Query("SELECT l FROM Autor a JOIN a.libros l WHERE l.idioma = :idioma")
+    List<Libro> librosPorIdioma(@Param("idioma") Idioma idioma);
 
 }

@@ -1,9 +1,6 @@
 package com.geralexcas.gutendexlitelatura.principal;
 
-import com.geralexcas.gutendexlitelatura.model.Datos;
-import  com.geralexcas.gutendexlitelatura.model.Libro;
-import  com.geralexcas.gutendexlitelatura.model.Autor;
-import com.geralexcas.gutendexlitelatura.model.DatosLibros;
+import com.geralexcas.gutendexlitelatura.model.*;
 import com.geralexcas.gutendexlitelatura.service.ConsumoApi;
 import com.geralexcas.gutendexlitelatura.service.ConvierteDatos;
 import  com.geralexcas.gutendexlitelatura.repository.IAutorRepository;
@@ -203,7 +200,62 @@ public class Principal {
             System.out.println("ingrese un año valido" + e.getMessage());
         }
     }
+public  void listarLibrosPorIdioma(){
+        var menuParaidiomas = """
+                Escoja un iidoma
+                1: ingles
+                2: Español
+                3: Frances
+                4: Portugues
+                5: Aleman
+                0: regresar
+                """;
+    System.out.println(menuParaidiomas);
+    try {
+        var opcioniidoma =Integer.parseInt(teclado.nextLine());
+        switch (opcioniidoma){
+            case 1:
+                buscarLibrosPorIdioma("en");
+            break;
+            case 2:
+                buscarLibrosPorIdioma("es");
+                break;
+            case 3:
+                buscarLibrosPorIdioma("fr");
+                break;
+            case 4:
+                buscarLibrosPorIdioma("pt");
+                break;
+            case 5:
+                buscarLibrosPorIdioma("de");
+                break;
+            case 0:
+                System.out.println("Regresando ...");
+                break;
+            default:
+                System.out.println("Ingrese una opción válida");
+        }
+    } catch (NumberFormatException e) {
+        System.out.println("Opción no válida: " + e.getMessage());
+        }
+    }
+private  void  buscarLibrosPorIdioma(String idioma){
+        try {
+            Idioma idiomaEnum = Idioma.valueOf(idioma.toUpperCase());
+            List<Libro> libros = repository.librosPorIdioma(idiomaEnum);
+            if(!libros.isEmpty()){
+                libros.stream()
+                        .forEach(System.out::println);
+            }else {
+                System.out.println("no hay libros registrados en este idioma");
 
+            }
+        }catch (IllegalArgumentException e){
+            System.out.println("introduce un idioma valido (en, es, fr, etc.)");
+
+        }
+
+}
 
 }
 
